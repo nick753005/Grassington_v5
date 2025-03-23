@@ -6,13 +6,38 @@ function displayMessage(event) {
     const time = document.getElementById('time').value;
     const places = document.getElementById('places').value;
       
-    const d = new Date(date);                     // Create a Date object
+    const d = new Date(date);               // Create a Date object
     year = d.getFullYear(); 
-    month = d.getMonth() + 1;                     // months start at zero
+    month = d.getMonth();
     ndate = d.getDate();
     const f_date = ndate+"/"+month+"/"+year;      // dd/mm/yyyy format
 
-    document.getElementById("confirmation").innerHTML ="Your table is booked for "+f_date+" at "+time+ "pm for "+places+" places";
+    output = "Your table is booked for " + f_date + " at " + time + "pm for " + places;
+    if(places == 1)
+        output = output + " place";
+    else
+        output = output + " places";
+
+    let audio = new Audio("sounds/success.wav"); 
+
+
+    const nd = new Date();                  // get the current date
+    cur_year = nd.getFullYear(); 
+    cur_month = nd.getMonth();
+    cur_date = nd.getDate();
+    
+
+    if( (year < cur_year) || ((year == cur_year) && (month < cur_month)) || ( (month == cur_month) && ( ndate < cur_date) ) )
+    {
+        output = "Date must be sometime in the future"; 
+        audio.src = "sounds/error.wav"; 
+    }  
+
+
+    document.getElementById("confirmation").innerHTML = output
+    audio.play();
+
+
 }
       
 
