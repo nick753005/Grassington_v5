@@ -1,4 +1,7 @@
 
+var num_bookings = Array(31).fill(0);
+
+
 function displayMessage(event) {
     event.preventDefault();     // Prevent the form from submitting
       
@@ -31,19 +34,26 @@ function displayMessage(event) {
     {
         output = "Date must be sometime in the future"; 
         audio.src = "sounds/error.wav"; 
-    }  
-
+    }
+    else if( num_bookings[ndate] >= 5 )
+    {
+        output = "Sorry - we are fully booked for that date<br><br>Please try a different date"; 
+        audio.src = "sounds/error.wav"; 
+        }  
+        else  
+            num_bookings[ndate] += 1;
 
     document.getElementById("confirmation").innerHTML = output
     audio.play();
-
-
 }
       
 
 function cancelBooking(event) {
-  event.preventDefault();     // Prevent the form from submitting
+    event.preventDefault();     // Prevent the form from submitting
 
-  document.getElementById("confirmation").innerHTML = "This booking has been cancelled<br><br>" + 
+    document.getElementById("confirmation").innerHTML = "This booking has been cancelled<br><br>" + 
       "You can book again for a different time or date";
+
+    if( num_bookings[ndate] )
+        num_bookings[ndate] -= 1;
 }
