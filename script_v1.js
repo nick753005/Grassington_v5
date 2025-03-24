@@ -11,7 +11,7 @@ function displayMessage(event) {
       
     const d = new Date(date);               // Create a Date object
     year = d.getFullYear(); 
-    month = d.getMonth();
+    month = d.getMonth() + 1;               // months start at zero for January
     ndate = d.getDate();
     const f_date = ndate+"/"+month+"/"+year;      // dd/mm/yyyy format
 
