@@ -11,9 +11,10 @@ function displayMessage(event) {
       
     const d = new Date(date);               // Create a Date object
     year = d.getFullYear(); 
-    month = d.getMonth() + 1;               // months start at zero for January
+    month = d.getMonth();              
     ndate = d.getDate();
-    const f_date = ndate+"/"+month+"/"+year;      // dd/mm/yyyy format
+    nmonth = month + 1;                             // months start with zero for January
+    const f_date = ndate+"/"+nmonth+"/"+year;      // dd/mm/yyyy format
 
     output = "Your table is booked for " + f_date + " at " + time + "pm for " + places;
     if(places == 1)
